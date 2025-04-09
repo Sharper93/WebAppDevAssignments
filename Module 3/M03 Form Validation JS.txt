@@ -1,0 +1,223 @@
+Complete the JavaScript checkForm() function so that checkForm() sets the input style.backgroundColor to LightGreen for each field that passes the validation check and sets the input field's style.backgroundColor to Orange if the validation fails.
+
+let tosForm = document.querySelector("#tosForm");
+tosForm.addEventListener("submit", checkForm);
+
+function checkForm(event) {
+   tosForm.screenName.style.backgroundColor = "LightGreen";
+   tosForm.zip.style.backgroundColor = "LightGreen";
+   tosForm.tos.style.backgroundColor = "LightGreen";
+
+   if (tosForm.screenName.value === "") {
+      tosForm.screenName.style.backgroundColor = "Orange";
+      event.preventDefault();
+   }
+
+   if (tosForm.zip.value.length != 5) {
+      tosForm.zip.style.backgroundColor = "Orange";
+      event.preventDefault();
+   }
+
+   if (tosForm.tos.value != "yes") {
+      tosForm.agreement.style.backgroundColor = "Orange";
+      event.preventDefault();
+   }
+}
+
+
+
+
+---------------------------------------------------
+
+The JavaScript code defines three boolean variables that must all be true for the form to submit: screenNameValid, zipCodeValid, and tosAgreeValid. Two input event handlers exist:
+
+The checkScreenName() function is called when the screen name changes and assigns screenNameValid with true when the field is not empty.
+
+The checkZipCode() function is called when the ZIP code changes and assigns zipCodeValid with true when the field contains five digits.
+
+Both functions also make the input widget's background orange if the input is invalid.
+
+Add a checkTosAgree() function that is called when the TOS agreement input changes. The function should assign tosAgreeValid with true when the user enters "yes". The function should also set the input widget's background to the default color if "yes" is typed and orange for all other input.
+
+
+let screenNameValid = false;
+let zipCodeValid = false;
+let tosAgreeValid = false;
+
+let myForm = document.querySelector("#tosForm");
+myForm.addEventListener("submit", checkForm);
+
+let screenNameWidget = document.querySelector("#screenName");
+screenNameWidget.addEventListener("input", checkScreenName);
+
+let zipCodeWidget = document.querySelector("#zip");
+zipCodeWidget.addEventListener("input", checkZipCode);
+
+// Add an input event handler for the tos agreement input 
+let tosAgreeWidget = document.querySelector("#tos");
+tosAgreeWidget.addEventListener("input", checkTosAgree);
+
+function checkScreenName() {
+   let screenName = screenNameWidget.value.trim();
+   screenNameValid = screenName.length > 0; 
+   
+   if (screenNameValid) {
+      screenNameWidget.style.backgroundColor = "initial";
+   }
+   else {
+      screenNameWidget.style.backgroundColor = "orange";
+   }
+}
+
+function checkZipCode() {
+   // ZIP must be 5 digits with nothing before or after
+   let regex = /^\d\d\d\d\d$/;
+   let zip = zipCodeWidget.value.trim();
+   zipCodeValid = zip.match(regex);
+   
+   if (zipCodeValid) {
+      zipCodeWidget.style.backgroundColor = "initial";
+   }
+   else {
+      zipCodeWidget.style.backgroundColor = "orange";
+   }
+}
+
+function checkTosAgree() {
+   tosAgreeValid = tosWidget.value.trim().toLowerCase() === "yes";
+   
+   if (tosAgreeValid) {
+      tosWidget.style.backgroundColor = "initial";
+   }
+   else {
+      tosWidget.style.backgroundColor = "orange";
+   }
+}
+
+function checkForm(event) {   
+   if (!screenNameValid || !zipCodeValid || !tosAgreeValid) {
+      event.preventDefault();
+   }
+}
+
+
+
+-------------------------------------------------------------------------
+
+In the validateForm() function, the if statement verifies the phone number is exactly 10 characters long. Display "Phone number is invalid" in the console log if the phone number does not meet the requirement. Use the event method preventDefault() to avoid submitting the form when the input is invalid.
+
+let form = document.getElementById("userForm");
+
+function validateForm(event) {
+   let phoneNumber = form.phoneNumber.value;
+   let userName = form.userName.value;
+
+   if (phoneNumber.length !== 10) {
+
+      /* Your solution goes here */
+      event.preventDefault();
+      console.log("Phone number is invalid")
+
+   }
+}
+
+form.addEventListener("submit", validateForm);
+
+
+------------------------------------------------------------
+
+Use the isNaN() function in validateForm() to verify the phone number is a number. Display "Invalid phone number" in the console log if the phone number is not a number. Use the event method preventDefault() to avoid submitting the form when the input is invalid.
+
+
+let form = document.getElementById("userForm");
+
+function validateForm(event) {
+   let phoneNumber = form.phoneNumber.value;
+
+   /* Your solution goes here */
+   if (isNaN(phoneNumber)) {
+      event.preventDefault();
+      console.log("Invalid phone number")
+   }
+}
+
+form.addEventListener("submit", validateForm);
+
+
+------------------------------------------------------------
+
+Update the validateForm() function to verify the phone number contains a number and the username is at least 3 characters long. Display "Input is invalid" in the console log if the phone number or username do not meet the requirements. Use the event method preventDefault() to avoid submitting the form when the input is invalid.
+
+
+let form = document.getElementById("userForm");
+
+function validateForm(event) {
+   let phoneNumber = form.phoneNumber.value;
+   let userName = form.userName.value;
+
+   /* Your solution goes here */
+   if (isNaN(phoneNumber) || (userName.length < 3)) {
+      event.preventDefault();
+      console.log("Input is invalid")
+   } 
+}
+
+form.addEventListener("submit", validateForm);
+
+
+----------------------------------------------------------------------
+
+In the userAgeCheck() function, the background is initialized with invalidColor and userAgeValid with false. Validate that the user age field is at least 15 and at most 120. If valid, set the background of the field to validColor and assign true to userAgeValid.
+
+Note: userAgeInput.value accesses the userAge.
+
+
+
+let validColor = "LightGreen";
+let invalidColor = "Orange";
+let userAgeInput = document.getElementById("userAge");
+let formWidget = document.getElementById("userForm");
+let userAgeValid = false;
+
+function userAgeCheck(event) {
+   // Modify this function to appropriately set the following variables.
+   userAgeInput.style.background = invalidColor;   
+   userAgeValid = false;
+
+   /* Your solution goes here */
+   if (userAgeInput.value > 15 && userAgeInput.value < 120) {
+   userAgeInput.style.background = validColor;
+   userAgeValid = true;
+   } else {
+      userAgeInput.style.background = invalidColor;
+      userAgeValid = false;
+   }
+
+}
+
+function formCheck(event) {
+   if (!userAgeValid) {
+      event.preventDefault();
+   }
+}
+
+userAgeInput.addEventListener("input", userAgeCheck);
+formWidget.addEventListener("submit", formCheck);
+
+
+------------------------------------------------------------------
+
+Use HTML validation attributes to ensure the entered age is between 16 and 65, inclusive, and the username is 10 characters or less.
+
+
+<form>
+   <p>
+      <label for="userAge">User Age:</label>
+      <input id="userAge" type="number" name="age" min='16' max='65'>
+   </p>
+   <p>
+      <label for="userName">Username:</label>
+      <input id="userName" type="text" name="username" maxlength='10'>
+   </p>
+   <input type="submit">
+</form>

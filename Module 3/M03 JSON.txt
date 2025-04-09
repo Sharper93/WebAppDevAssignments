@@ -1,0 +1,68 @@
+Assign objectData with a JSON object with properties: name (a string), userAge (a number), and userSiblings (an array of strings).
+Note: The content of the properties doesn't matter.
+
+let objectData;
+
+/* Your solution goes here */
+objectData = {
+   name: "Sammi",
+   userAge: 31,
+   userSiblings: ["Andi", "Jenni", "Lissa"]
+};
+
+
+
+---------------------------------------------------------------------
+
+Assign jsonObject with the parsed value of the stringStructure variable. Then, assign 50 to the points property in jsonObject and assign stringStructure with the stringified version of jsonObject.
+
+
+let stringStructure = '{ "name": "Michael Jordan", "height": { "ft": 6, "in": 6 }, "points": 25, "position": "Power forward" }';
+
+/* Your solution goes here */
+let jsonObject = JSON.parse(stringStructure); // Parse the string into an object
+jsonObject.points = 50; // Update the points property to 50
+stringStructure = JSON.stringify(jsonObject); // Convert the modified object back into a string
+
+
+--------------------------------------------------------------------------------------------------------
+
+Use a reviver function of JSON.parse() to subtract 3 from year and assign jsonStructure with the result.
+
+
+
+let stringStructure = '{ "year": 2013, "month": 4, "day": 19, "hour": 9, "minute": 32 }';
+
+/* Your solution goes here */
+
+let jsonStructure = JSON.parse(stringStructure, (key, value) => {
+   if (key === "year") {
+      return value - 3;
+   }
+   return value;
+});
+
+
+
+-----------------------------------------------------------------------------------------------------------
+
+Use a replacer array of JSON.stringify() to return only the hour and minute properties of jsonData, and assign stringStructure with the result.
+
+
+
+let jsonData = { "year": 2013, "month": 8, "day": 19, "hour": 9, "minute": 32 };
+
+/* Your solution goes here */
+let stringStructure = JSON.stringify(jsonData, ["hour", "minute"]);
+
+
+-------------------------------------------------------------------------
+
+Use a spacer function of JSON.stringify() to use 3 consecutive hashes (#) for indentation, and display the result on the console.
+
+
+let jsonStructure = { "day": "Thursday", "date": { "year": 2015, "month": 2, "day": 12 }, "time": { "hour": 11, "minute": 44 } };
+
+/* Your solution goes here */
+console.log(JSON.stringify(jsonStructure, null, "###"));
+

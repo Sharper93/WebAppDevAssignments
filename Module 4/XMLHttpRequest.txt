@@ -1,0 +1,85 @@
+Store a new XMLHttpRequest object in the xhr variable, then assign requestHandler function as the load event handler.
+
+function requestHandler() {
+   console.log("handling response: " + this.responseText);
+}
+
+/* Your solution goes here */
+let xhr = new XMLHttpRequest();
+xhr.addEventListener("load", requestHandler);
+
+
+------------------------------------------------------------------
+
+Using the xhr variable, initialize a connection to GET https://wp.zybooks.com/grades.php?name=Katie, set the response type to json, then send the request.
+
+
+function responseReceivedHandler() {
+   console.log("Response received");
+}
+
+let xhr = new XMLHttpRequest();
+xhr.addEventListener("load", responseReceivedHandler);
+
+/* Your solution goes here */
+xhr.responseType = "json";
+xhr.open("GET", "https://wp.zybooks.com/grades.php?name=Katie");
+xhr.send();
+
+----------------------------------------------------------------------------------
+
+Log "bad request" to the console if the response's status is 400. Otherwise, log "not bad request" to the console.
+
+
+function responseReceivedHandler() {
+
+   /* Your solution goes here */
+   if (this.status === 400) {
+      xhr.innerHTML = this.response;
+      console.log("bad request");
+       } else {
+     console.log("not bad request");
+       }
+}
+
+let xhr = new XMLHttpRequest();
+xhr.addEventListener("load", responseReceivedHandler);
+xhr.addEventListener("error", responseReceivedHandler);
+xhr.open("GET", "https://wp.zybooks.com/weather.php?zip=90210");
+xhr.send();
+
+----------------------------------------------------------------------------------
+
+If the response object's success property is true, log the final grade from the response to the console. Otherwise, log the error from the response to the console.
+
+Note: this.response is the response.
+
+function responseReceivedHandler() {
+   /* Successful request:
+      {
+         "success": true,
+         "grades": {
+            "final": "...",
+            ...
+         }
+      }
+
+      Unsuccessful request:
+      {
+         "success": false,
+         "error": "..."
+      } */
+
+   /* Your solution goes here */
+   if (this.response.success) {
+      console.log(this.response.grades.final);
+   } else {
+      console.log(this.response.error);
+   }
+}
+
+let xhr = new XMLHttpRequest();
+xhr.responseType = "json";
+xhr.addEventListener("load", responseReceivedHandler);
+xhr.open("GET", "https://wp.zybooks.com/grades.php?name=Kelly");
+xhr.send();

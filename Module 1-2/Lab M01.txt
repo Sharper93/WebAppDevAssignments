@@ -1,0 +1,16 @@
+Lab M01 
+function drawTriangle(triangleSize) {
+
+   // TODO: Add your solution here
+   for (let i = 1; i <= triangleSize; i++)
+   console.log("*".repeat(i))
+}
+
+console.log("Testing drawTriangle()...");
+
+// TODO: Test drawTriangle() with different arguments
+drawTriangle(14);
+
+
+// Do NOT remove the following line
+export default drawTriangle;

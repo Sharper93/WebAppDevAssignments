@@ -1,0 +1,328 @@
+Add a Course constructor function that takes a title as a parameter. The Course class should have two properties: a title and students array. The constructor function should initialize the title property to the title parameter and initialize the students array to an empty array.
+
+Add a method to the constructor function called addStudent that takes a single student parameter. The addStudent() method should push the student to the back of the students array property.
+
+Add a prototype method called displayStudents that takes no parameters. The displayStudents() method should output the course title and all students' names and GPAs to the console.
+
+Instantiate two different courses with any titles, and add a few students (Student objects) to the courses using the addStudent() method.
+
+Display all the students in the two courses using the displayStudents() method.// Student class
+
+
+function Student(name, gpa) {
+   this.name = name;
+   this.gpa = gpa;
+}
+
+
+// Add a Course constructor function that takes a title as a parameter 
+// The Course class should have 2 properties: a  title and an array of students. 
+// The constructor function should initialize the title property to the title parameter 
+// and initialize the students array to an empty array.
+function Course(title) {
+   this.title = title;   
+   this.students = [];
+   
+   // Add a method to the constructor function called addStudent that takes a single student parameter. 
+   // The .addStudent() method should push the student to the back of the students array property.  
+   this.addStudent = function(student) {
+      this.students.push(student);  
+   };
+}
+
+// Add a prototype method called displayStudents that takes no parameters. 
+// The .displayStudents() method should output the course title and all 
+// students' names and GPAs to the console.
+Course.prototype.displayStudents = function() {
+   console.log("Students in " + this.title + ":");
+   
+   for (let i = 0; i < this.students.length; i++) {
+      console.log((i + 1) + ". " + this.students[i].name + " - " + this.students[i].gpa);
+   }
+};
+
+// Instantiate 2 different courses with any titles, and add a few 
+// students (Student objects) to the courses using the .addStudent() method.
+let course1 = new Course("General Sociology");
+let course2 = new Course("Macroeconomics");
+
+course1.addStudent(new Student("Jane", 3));
+course1.addStudent(new Student("Eric", 4));
+
+course2.addStudent(new Student("Zane", 3.3));
+course2.addStudent(new Student("Janet", 2.1));
+
+// Display all the students in the 2 courses using the .displayStudents() method.
+course1.displayStudents();
+course2.displayStudents();
+
+
+
+-----------------------------------------------------------------------------------------
+
+The JavaScript code defines a Game class and two methods.
+
+Add a VideoGame class and all the necessary code so VideoGame inherits from the Game class.
+
+Add a private variable to the VideoGame class called totalPoints, and initialize totalPoints to 0.
+
+Add a getter method called getScore() to get the totalPoints variable.
+
+Add a method called addToScore(points) that adds the points to totalPoints.
+
+Instantiate a new VideoGame object with the title "Pac-Man". Call the appropriate methods to:
+
+Start playing the game.
+Show the score (should be 0).
+Add 20 points.
+Add 50 points.
+Show the score (should be 70).
+Stop playing the game.
+
+
+
+function Game(title) {
+  this.title = title;  
+}
+
+Game.prototype.startPlaying = function() {
+  console.log("Now playing " + this.title + "!");
+};
+
+Game.prototype.stopPlaying = function() {
+  console.log("Taking a break.");
+};
+
+// Add a VideoGame class and all the necessary code so 
+// VideoGame inherits from the Game class.
+
+function VideoGame(title) {
+   // Call parent constructor
+   Game.call(this, title);
+   
+   // Add a private variable to the VideoGame class 
+   // called totalPoints, and initialize totalPoints to 0.
+   let totalPoints = 0;
+   
+   // Add a getter method called getScore() to get the totalPoints variable
+   this.getScore = function() {
+      return totalPoints;
+   }
+   
+   // Add a method called addToScore(points) that adds the points to totalPoints
+   this.addToScore = function(points) {
+      totalPoints += points;      
+   }   
+}
+
+// Duplicate functionality of parent
+VideoGame.prototype = Object.create(Game.prototype);
+VideoGame.prototype.constructor = VideoGame;
+
+// Instantiate a new VideoGame object with the title "Pac-Man". 
+let pacman = new VideoGame("Pac-Man");
+
+// Start playing the game
+pacman.startPlaying();
+
+// Show the score (should be 0)
+console.log("Score: " + pacman.getScore() + " points");
+
+// Add 20 points
+pacman.addToScore(20);
+console.log("Score: " + pacman.getScore() + " points");
+
+// Add 50 points
+// Show the score (should be 70)
+pacman.addToScore(50);
+console.log("Score: " + pacman.getScore() + " points");
+
+// Stop playing the game
+pacman.stopPlaying();
+
+
+
+
+----------------------------------------------------
+
+
+Create a Weasel class with properties gender and weight passed to the constructor.
+
+
+/* Your solution goes here */
+function Weasel(gender, weight) {
+   this.gender = gender;
+   this.weight = weight;
+}
+
+
+-------------------------------------------------------
+
+Create a Puppy class with private property color and both a getter and a setter for that property called getColor and setColor. The constructor should take a parameter to initialize the private property.
+
+
+/* Your solution goes here */
+class Puppy {
+   constructor(color) {
+        this.color = color; // Initialize private property
+    }
+
+    // Getter method to retrieve the color
+    getColor() {
+        return this.color;
+    }
+
+    // Setter method to update the color
+    setColor(newColor) {
+        this.color = newColor;
+    }
+}
+
+// Example usage:
+let myPuppy = new Puppy("brown");
+console.log(myPuppy.getColor()); // Output: brown
+
+myPuppy.setColor("black");
+console.log(myPuppy.getColor()); // Output: black
+
+
+-------------------------------------------------------
+
+
+Define a toString prototype method that returns the cat's name, height, and gender properties separated by periods.
+
+
+function Cat(name, color, gender, height, weight, age) {
+   this.name = name;
+   this.color = color;
+   this.gender = gender;
+   this.height = height;
+   this.weight = weight;
+   this.age = age;
+}
+
+/* Your solution goes here */
+Cat.prototype.toString = function() {
+   return `${this.name}.${this.height}.${this.gender}`;
+};
+
+
+let myCat = new Cat("Mylo", "White", "Male", "20cm", "10lbs", 2);
+console.log(myCat.toString()); 
+
+-------------------------------------------------
+
+Make Neptune inherit from Planet by assigning Neptune with a copy of Planet's prototype and setting the Neptune class' prototype constructor to Neptune's constructor function.
+
+
+function Planet() {
+   // class constructor code
+}
+
+function Neptune() {
+   Planet.call(this);
+}
+
+/* Your solution goes here */
+Neptune.prototype = Object.create(Planet.prototype); // Inherit from Planet
+Neptune.prototype.constructor = Neptune; // Set the prototype constructor to Neptune
+
+
+-----------------------------------------------------------------------------------------------
+
+Create a Parrot class with a constructor that takes two arguments and initializes properties weight and gender in that order.
+
+
+
+/* Your solution goes here */
+class Parrot {
+   constructor(weight, gender) {
+      this.weight = weight;
+      this.gender = gender;
+   }
+}
+
+-----------------------------------------------------------------------------------------------
+
+Perform the following tasks:
+
+Create a getter for the Puppy class called minHeight that returns 80% of height.
+Create a setter called minHeight that sets the height property to 125% of the given value.
+
+
+class Puppy {
+   constructor(height) {
+      this.height = height;
+   }
+
+   /* Your solution goes here */
+   get minHeight() {
+      return this.height * .80;
+   }
+   
+   set minHeight(height) {
+      this.height = height * 1.25;
+   }
+
+
+}
+
+-----------------------------------------------------------------------------------------------
+
+Perform the following tasks:
+
+Create a toString() method that returns the cat's height, weight, and age properties, separated by commas.
+Create a speak() static method that returns "Purr".
+
+class Cat {
+   constructor(name, color, gender, height, weight, age) {
+      this.name = name;
+      this.color = color;
+      this.gender = gender;
+      this.height = height;
+      this.weight = weight;
+      this.age = age;
+   }
+
+   /* Your solution goes here */
+   toString() {
+      return `${this.height},${this.weight},${this.age}`; // back-ticks not single quotes
+   }
+   
+   static speak() {
+      return "Purr";
+   }
+
+}
+
+-----------------------------------------------------------------------------------------------
+
+
+Perform the following tasks:
+
+Create a Puppy class that inherits from the Animal class. The constructor should take two arguments and initialize the properties type from Animal and weight from Puppy.
+Create a toString() method that overrides Animal's toString() method and returns the animal's type and weight properties, separated by a comma.
+
+
+class Animal {
+   constructor(type) {
+      this.type = type;
+   }
+
+   toString() {
+      return "type is " + this.type;
+   }  
+}
+
+/* Your solution goes here */
+
+class Puppy extends Animal {
+   constructor(type, weight) {
+      super(type);
+      this.weight = weight;
+   }
+   toString() {
+      return `${this.type},${this.weight}`; // back-ticks not single quotes
+   }
+}
+
